@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import { useCustomTheme } from '../../theme/ThemeContext';
 
 const {width} = Dimensions.get('window');
 
@@ -28,6 +29,7 @@ const images = [
 const CustomCarousel = () => {
   const flatListRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const {theme} = useCustomTheme()
 
   const scrollToNext = () => {
     const nextIndex = (activeIndex + 1) % images.length;
@@ -36,7 +38,7 @@ const CustomCarousel = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(scrollToNext, 3000); 
+    const interval = setInterval(scrollToNext, 3000);
     return () => clearInterval(interval);
   }, [activeIndex]);
 
@@ -45,9 +47,13 @@ const CustomCarousel = () => {
     setActiveIndex(index);
   };
 
-  const renderItem = ({item}) => (
-    <Image source={{uri: item.uri}} style={styles.image} />
-  );
+  const renderItem = ({item}) => {
+    return (
+      <View style={styles.imageWrapper}>
+        <Image source={{uri: item?.uri}} style={styles.image} />
+      </View>
+    );
+  };
 
   return (
     <View>
@@ -73,7 +79,7 @@ const CustomCarousel = () => {
             <View
               style={[
                 styles.dot,
-                {backgroundColor: activeIndex === index ? '#333' : '#ccc'},
+                {backgroundColor: activeIndex === index ? theme.primary : theme.inActive},
               ]}
             />
           </TouchableOpacity>
@@ -86,21 +92,28 @@ const CustomCarousel = () => {
 export default CustomCarousel;
 
 const styles = StyleSheet.create({
-  image: {
+  imageWrapper: {
     width: width,
     height: 180,
+    borderRadius: 15,
+    overflow: 'hidden',
+    marginHorizontal: 0,
+  },
+  image: {
+    width: '92%',
+    height: 180,
     resizeMode: 'cover',
-    // borderRadius:15
+    borderRadius: 15,
   },
   dotContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 10,
-    borderRadius:20
+    borderRadius: 20,
   },
   dot: {
-    width: 10,
-    height: 10,
+    width: 8,
+    height: 8,
     borderRadius: 5,
     marginHorizontal: 5,
   },

@@ -35,7 +35,9 @@ const BottomTabNavigation = () => {
             marginLeft: widthPercentageToDP('10%'),
             paddingTop: 13,
             position: 'absolute',
-            bottom: 25,
+            bottom: 10,
+            elevation:0,
+            borderColor:'transparent'
           },
           tabBarButton: props => (
             <Pressable
