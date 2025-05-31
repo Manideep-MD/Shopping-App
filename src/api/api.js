@@ -6,5 +6,9 @@ export const FETCH_CATEGORIES = async () => {
 };
 
 export const FETCH_PRODUCTS = async () => {
-    return await axios.get(`${BASE_URL}`);
-  };
+  return await axios.get(`${BASE_URL}`);
+};
+
+export const FETCH_PRODUCT_DETAILS = async id => {
+  return await axios.get(`${BASE_URL}${id}`);
+};

@@ -10,6 +10,7 @@ export interface ThemeColors {
   cartButton: string;
   secondaryBG: string;
   text: string;
+  detailsBG:string
 }
 
 export const lightTheme: ThemeColors = {
@@ -17,6 +18,7 @@ export const lightTheme: ThemeColors = {
   background: '#FFFFFF',
   primaryBG: '#FDF2D2',
   secondaryBG: '#2E3240',
+  detailsBG:'#FDD8D3',
   inActive: '#E7E6E3',
   iconBackground: '#BBD9E4',
   darkblue: '#114A4A',
@@ -34,6 +36,7 @@ export const darkTheme: ThemeColors = {
   darkblue: '#114A4A',
   cartButton: '#D1FBB9',
   text: '#000',
+  detailsBG:'#FDD8D3',
 };
 
 export type ThemeColorKey = keyof ThemeColors;

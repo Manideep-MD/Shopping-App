@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import StarIcon from 'react-native-vector-icons/AntDesign';
 import HeartIcon from 'react-native-vector-icons/FontAwesome';
 import {useCustomTheme} from '../../theme/ThemeContext';
+import { useNavigation } from '@react-navigation/native';
+import { SCREENS } from '../../constants/screenNames';
 
 interface ProductCardProps {
   item: {
+    id:number;
     image: string;
     title: string;
     price: number;
@@ -18,8 +21,13 @@ interface ProductCardProps {
 
 const ProductCard = ({item}: ProductCardProps) => {
   const {theme} = useCustomTheme();
+  const navigation = useNavigation<any>()
+
+  const handleNavigate = () =>{
+    navigation.navigate(SCREENS.PRODUCT_DETAILS,{Id:item?.id})
+  }
   return (
-    <View style={[styles.cardContainer, {width: wp('43%')}]}>
+    <Pressable style={[styles.cardContainer, {width: wp('43%')}]} onPress={handleNavigate}>
       <View style={[styles.imageWrapper, {backgroundColor: theme.inActive}]}>
         <View style={styles.heartContainer}>
           <HeartIcon
@@ -45,7 +53,7 @@ const ProductCard = ({item}: ProductCardProps) => {
         </View>
       </View>
       <Text style={styles.price}>$ {item?.price}</Text>
-    </View>
+    </Pressable>
   );
 };
 

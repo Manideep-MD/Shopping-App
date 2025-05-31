@@ -5,4 +5,5 @@ export const SCREENS = {
   PROFILE: 'Profile',
   MESSAGES: 'Messages',
   BOTTOM_TAB: 'BottomTabs',
+  PRODUCT_DETAILS:'ProductDetails'
 };
